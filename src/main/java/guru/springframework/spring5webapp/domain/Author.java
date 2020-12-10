@@ -1,27 +1,43 @@
 package guru.springframework.spring5webapp.domain;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
-
+@Entity
 public class Author {
 
 
-    // fields
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    private Set<Book> books;
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
 
 
-    // constructors
+
     public Author() {
     }
 
-    public Author(String name, Set<Book> books) {
+    public Author(String name) {
         this.name = name;
-        this.books = books;
+
     }
 
 
     // getters and setters
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
